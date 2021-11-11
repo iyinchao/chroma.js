@@ -29,7 +29,7 @@ vows
        },
         'average in lab': {
             topic: chroma.average(['blue', 'red', 'white'], 'lab'),
-            'is #5a0000'(topic) { assert.equal(topic.hex(), '#e26daf') }
+            'is #5a0000'(topic) { assert.equal(topic.hex(), '#dc6daf') }
         },
         'average h in lch': {
             topic: chroma.average([chroma.lch(50, 50, 0), chroma.lch(50, 50, 90)], 'lch').get('lch.h'),

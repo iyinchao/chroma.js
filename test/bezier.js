@@ -24,7 +24,7 @@ vows
             },
             'starts from white'(topic) { assert.equal(topic.f(0).hex(), '#ffffff'); },
             'ends in black'(topic) { assert.equal(topic.f(1).hex(), '#000000'); },
-            'center is a greyish red'(topic) { assert.equal(topic.f(0.5).hex(), '#c45c44'); }
+            'center is a greyish red'(topic) { assert.equal(topic.f(0.5).hex(), '#c35d43'); }
         },
 
         'four color cubic bezier interpolation': {
@@ -34,8 +34,8 @@ vows
             'starts from white'(topic) { assert.equal(topic.f(0).hex(), '#ffffff'); },
             'ends in black'(topic) { assert.equal(topic.f(1).hex(), '#000000'); },
             '1st quarter'(topic) { assert.equal(topic.f(0.25).hex(), '#ffe085'); },
-            'center'(topic) { assert.equal(topic.f(0.5).hex(), '#e69735'); },
-            '3rd quarter'(topic) { assert.equal(topic.f(0.75).hex(), '#914213'); }
+            'center'(topic) { assert.equal(topic.f(0.5).hex(), '#e59734'); },
+            '3rd quarter'(topic) { assert.equal(topic.f(0.75).hex(), '#904212'); }
         },
 
         'five color diverging quadratic bezier interpolation': {
@@ -45,8 +45,8 @@ vows
             'starts from darkred'(topic) { assert.equal(topic.f(0).hex(), '#8b0000'); },
             'ends in royalblue'(topic) { assert.equal(topic.f(1).hex(), '#4169e1'); },
             'center is snow'(topic) { assert.equal(topic.f(0.5).hex(), '#fffafa'); },
-            '1st quarter'(topic) { assert.equal(topic.f(0.25).hex(), '#e9954e'); },
-            '3rd quarter'(topic) { assert.equal(topic.f(0.75).hex(), '#a6cfc1'); }
+            '1st quarter'(topic) { assert.equal(topic.f(0.25).hex(), '#e8964e'); },
+            '3rd quarter'(topic) { assert.equal(topic.f(0.75).hex(), '#a4cf21'); }
         },
 
         'using bezier in a chroma.scale': {
@@ -58,7 +58,7 @@ vows
             'starts from darkred'(topic) { assert.equal(topic.f(0), '#8b0000'); },
             'ends in royalblue'(topic) { assert.equal(topic.f(1), '#4169e1'); },
             'center is snow'(topic) { assert.equal(topic.f(0.5), '#fffafa'); },
-            '1st quarter'(topic) { assert.equal(topic.f(0.25), '#e9954e'); },
-            '3rd quarter'(topic) { assert.equal(topic.f(0.75), '#a6cfc1'); }
+            '1st quarter'(topic) { assert.equal(topic.f(0.25), '#e8964e'); },
+            '3rd quarter'(topic) { assert.equal(topic.f(0.75), '#a4cfc2'); }
         }})
     .export(module);

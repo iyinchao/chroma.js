@@ -133,7 +133,7 @@ vows.describe('Tests for the alpha channel').addBatch({
         }
     },
     'constructing laba color': {
-        topic: chroma(53.24079414130722, 80.09245959641109, 67.20319651585301, 0.25, 'lab'),
+        topic: chroma(54.29173376861782, 80.8124553179771, 69.88504032350531, 0.25, 'lab'),
         'color is red': function(topic) {
             return assert.equal(topic.name(), 'red');
         },
@@ -142,7 +142,7 @@ vows.describe('Tests for the alpha channel').addBatch({
         }
     },
     'constructing lcha color': {
-        topic: chroma(53.24079414130722, 104.55176567686985, 39.99901061253297, 0.25, 'lch'),
+        topic: chroma(54.29173376861782, 106.83899941284552, 40.85261277607026, 0.25, 'lch'),
         'color is red': function(topic) {
             return assert.equal(topic.name(), 'red');
         },
