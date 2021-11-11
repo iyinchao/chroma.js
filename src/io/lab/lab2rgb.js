@@ -20,9 +20,15 @@ const lab2rgb = (...args) => {
     x = LAB_CONSTANTS.Xn * lab_xyz(x);
     z = LAB_CONSTANTS.Zn * lab_xyz(z);
 
-    r = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);  // D65 -> sRGB
-    g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
-    b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
+    // r = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);  // D65 -> sRGB
+    // g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
+    // b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
+
+    // NOTE: use matrix of D50, 
+    // see: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+    r = xyz_rgb(3.1338561 * x - 1.6168667 * y - 0.4906146 * z);  // D50 -> sRGB
+    g = xyz_rgb(-0.9787684 * x + 1.9161415 * y + 0.0334540 * z);
+    b_ = xyz_rgb(0.0719453 * x - 0.2289914 * y + 1.4052427 * z);
 
     return [r,g,b_,args.length > 3 ? args[3] : 1];
 };

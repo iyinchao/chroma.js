@@ -1,5 +1,5 @@
 {
-  "name": "chroma-js",
+  "name": "chroma-js-d50",
   "description": "JavaScript library for color conversions",
   "version": "2.1.1",
   "author": "Gregor Aisch",
@@ -12,6 +12,10 @@
       "name": "Gregor Aisch",
       "email": "mail@driven-by-data.net",
       "web": "https://vis4.net"
+    },
+    {
+      "name": "Charles Yin",
+      "email": "charles@iyinchao.dev"
     }
   ],
   "bugs": "https://github.com/gka/chroma.js/issues",

@@ -199,7 +199,7 @@
     };
 
     chroma.Color = Color_1;
-    chroma.version = '2.1.0';
+    chroma.version = '2.1.1';
 
     var chroma_1 = chroma;
 
@@ -630,15 +630,32 @@
         // Corresponds roughly to RGB brighter/darker
         Kn: 18,
 
-        // D65 standard referent
-        Xn: 0.950470,
-        Yn: 1,
-        Zn: 1.088830,
+        // NOTE: Adhere to w3c spec, converting RGB to Lab color 
+        // will use D50 white point, see:
+        // https://www.w3.org/TR/css-color-4/#rgb-to-lab
 
-        t0: 0.137931034,  // 4 / 29
-        t1: 0.206896552,  // 6 / 29
-        t2: 0.12841855,   // 3 * t1 * t1
-        t3: 0.008856452,  // t1 * t1 * t1
+        // // D65 standard referent
+        // Xn: 0.950470,
+        // Yn: 1,
+        // Zn: 1.088830,
+
+        // D60 standard referent
+        // see: http://www.brucelindbloom.com/javascript/ColorConv.js
+        Xn: 0.96422,
+        Yn: 1,
+        Zn: 0.82521,
+
+        // t0: 0.137931034,  // 4 / 29
+        // t1: 0.206896552,  // 6 / 29
+        // t2: 0.12841855,   // 3 * t1 * t1
+        // t3: 0.008856452,  // t1 * t1 * t1
+
+        // Use refined coefficients
+        // see: http://www.brucelindbloom.com/index.html?Eqn_RGB_to_XYZ.html
+        t0: 16 / 116,
+        t1: 0.206896552,
+        t2: 1 / (24389 / (27 * 116)),
+        t3: 216 / 24389
     };
 
     var unpack$7 = utils.unpack;
@@ -674,9 +691,15 @@
         r = rgb_xyz(r);
         g = rgb_xyz(g);
         b = rgb_xyz(b);
-        var x = xyz_lab((0.4124564 * r + 0.3575761 * g + 0.1804375 * b) / labConstants.Xn);
-        var y = xyz_lab((0.2126729 * r + 0.7151522 * g + 0.0721750 * b) / labConstants.Yn);
-        var z = xyz_lab((0.0193339 * r + 0.1191920 * g + 0.9503041 * b) / labConstants.Zn);
+        // const x = xyz_lab((0.4124564 * r + 0.3575761 * g + 0.1804375 * b) / LAB_CONSTANTS.Xn);
+        // const y = xyz_lab((0.2126729 * r + 0.7151522 * g + 0.0721750 * b) / LAB_CONSTANTS.Yn);
+        // const z = xyz_lab((0.0193339 * r + 0.1191920 * g + 0.9503041 * b) / LAB_CONSTANTS.Zn);
+        
+        // NOTE: use matrix of D50, 
+        // see: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+        var x = xyz_lab((0.4360747 * r + 0.3850649 * g + 0.1430804 * b) / labConstants.Xn);
+        var y = xyz_lab((0.2225045 * r + 0.7168786 * g + 0.0606169 * b) / labConstants.Yn);
+        var z = xyz_lab((0.0139322 * r + 0.0971045 * g + 0.7141733 * b) / labConstants.Zn);
         return [x,y,z];
     };
 
@@ -708,9 +731,15 @@
         x = labConstants.Xn * lab_xyz(x);
         z = labConstants.Zn * lab_xyz(z);
 
-        r = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);  // D65 -> sRGB
-        g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
-        b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
+        // r = xyz_rgb(3.2404542 * x - 1.5371385 * y - 0.4985314 * z);  // D65 -> sRGB
+        // g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
+        // b_ = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
+
+        // NOTE: use matrix of D50, 
+        // see: http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+        r = xyz_rgb(3.1338561 * x - 1.6168667 * y - 0.4906146 * z);  // D50 -> sRGB
+        g = xyz_rgb(-0.9787684 * x + 1.9161415 * y + 0.0334540 * z);
+        b_ = xyz_rgb(0.0719453 * x - 0.2289914 * y + 1.4052427 * z);
 
         return [r,g,b_,args.length > 3 ? args[3] : 1];
     };
