@@ -1,6 +1,11 @@
-# Chroma.js
+# Chroma.js (D50 for lab color)
+
+> This is a modified version of original Chroma.js  
+> The white point value is changed to D50 to match the [w3c spec](https://www.w3.org/TR/css-color-4/#rgb-to-lab).
 
 [Chroma.js](https://vis4.net/chromajs/) is a ~~tiny~~ [small-ish](https://bundlephobia.com/result?p=chroma-js) zero-dependency JavaScript library ([13.5kB](https://bundlephobia.com/result?p=chroma-js)) for all kinds of color conversions and color scales.
+
+
 
 [![Build Status](https://api.travis-ci.com/gka/chroma.js.svg?branch=master)](https://travis-ci.com/gka/chroma.js)
 
